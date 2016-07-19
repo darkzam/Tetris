@@ -36,51 +36,26 @@ void Tetris::mostrarEstado(){
                        imprimir= pz1.getId();
                     }
                 }
-          //  if(j<9){
-                //std::cout << imprimir;
-                move(i,j);
-               // printw(pchar);
-              // std::cout << imprimir;
+              move(i,j);
+              init_pair( imprimir, imprimir , imprimir); 
 
-              if(imprimir!=0){
-
-              init_pair(1, COLOR_RED, COLOR_BLACK);
-              attron(COLOR_PAIR(1));
+              attron(COLOR_PAIR(imprimir));
               printw("%d", imprimir);
-              attroff(COLOR_PAIR(1));
-              }else{
-
-              printw("%d", imprimir);}
-           //   attroff(COLOR_PAIR(1));
-                refresh();
-         //   }
-         //   else{
-                //std::cout << imprimir << '\n';
-          //      move(i,j);
-           //     printw(pchar);
-           //     refresh();
-           // }
+              attroff(COLOR_PAIR(imprimir));
+              refresh();  
         }
       }
-
-     // std::cout << "---------------------------------------" << '\n';
 }
 
 void Tetris::generarPieza(){
     //pone la pieza en el mapa , en las coordenadas de inicio
  //generar un numero entre 1 y 7
     std::random_device rd;
-
     std::mt19937 e2(rd());
-
     std::uniform_int_distribution<> dist(1, 7);
-
-    //std::cout << dist(e2) << std::endl ;
-
     int cord[2]={0,4};
     pz1.setId(dist(e2),cord);
-    //pz1.mostrarCord();
-    //ahora ubicar la pieza en el mapa
+    
 }
 
 void Tetris::ubicarPieza(int idocero){
