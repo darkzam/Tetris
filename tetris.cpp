@@ -55,7 +55,7 @@ void Tetris::generarPieza(){
     std::uniform_int_distribution<> dist(1, 7);
     int cord[2]={0,4};
     pz1.setId(dist(e2),cord);
-    
+
 }
 
 void Tetris::ubicarPieza(int idocero){
@@ -69,11 +69,9 @@ void Tetris::ubicarPieza(int idocero){
 }
 
 void Tetris::iniciar(){
+
     Tetris::generarPieza();
-
-
-    //Tetris::ubicarPieza(pz1.getId());
-   // Tetris::mostrarEstado();
+    
     std::chrono::time_point<std::chrono::system_clock> start, finish;
 
     initscr();
@@ -88,31 +86,21 @@ void Tetris::iniciar(){
 
    while(true){
 
-    //dibujar tablero
-    //std::this_thread::sleep_for(std::chrono::milliseconds(500));
-
-    //Tetris::ubicarPieza(0);
-
     Tetris::eventosTeclado();
-    //mover pieza
-
-
-     //double segundosTranscurridos = difftime( time(0), inicio);
     finish = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed_seconds = finish-start;
+
     if( elapsed_seconds.count() >= 1.0){
         start = finish;
         if( !Tetris::detectarColision(1,0)){
-      //  Tetris::ubicarPieza(0);
+     
             pz1.moverse(1,0);
-        //Tetris::ubicarPieza(pz1.getId());
+      
         }else{
 
             ubicarPieza(pz1.getId());
             //chequear por lineas destruidas
             Tetris::puntaje();
-           // Tetris::mostrarEstado();
-           // printw("el valor de la esquina es: %d", mapa[19][0]);
             Tetris::generarPieza();
         }
     }
@@ -136,17 +124,14 @@ bool Tetris::detectarColision(int direccion, int componente){
     if(componente==0){
 
     if(fila>=19 && direccion==1){
-  //   std::cout<<"Se detecto colision: Fila es 19 y direccion 1: No se puede bajar mas"<<'\n';
+
         return true;
     }
     if(fila<=0 && direccion==-1){
-   // std::cout<<"Se detecto colision: Fila es 0 y direccion -1: No se puede subir mas"<<'\n';
-
+  
         return true;
     }
     if(mapa[fila+direccion][columna]!=0){
-
-   // std::cout<<"Se detecto colision en: Mapa["+std::to_string(fila+direccion)+"]["+std::to_string(columna)+"]"<<'\n';
 
             return true;
         }
@@ -194,7 +179,7 @@ bool Tetris::colisionGiro(float angulo){
         tmp[i][1] = yc+(x-xc)*static_cast<int>(sin(angulo*PI/180))+(y-yc)*static_cast<int>(cos(angulo*PI/180));
 
         if( tmp[i][0]<0 || tmp[i][1]<0){
-           //printw("Se detecto negativo en los valores x es : %d ; el valor de y es: %d", x, y);
+
             return true;
 
         }
@@ -209,13 +194,8 @@ bool Tetris::colisionGiro(float angulo){
             return true;
         }
      }
-  //  printw("no se detecto colision x: %d y: %d",x,y);
+
     return false;
-}
-
-Pieza Tetris::getPieza(){
-
-    return pz1;
 }
 
 void Tetris::puntaje(){
@@ -259,7 +239,7 @@ void Tetris::puntaje(){
             for(int j=0; j<10 ; j++){
 
                 mapa[arr[i]][j] = 0;
-               // printw("el array no es vacio el i elemento es: %d", arr[i]);
+      
             }
 
         }

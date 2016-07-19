@@ -19,7 +19,6 @@ public:
     void puntaje();
     bool detectarColision(int,int);
     bool colisionGiro(float);
-    Pieza getPieza();
 };
 
 #endif
